@@ -15,8 +15,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-public class Commons implements Constants {
-    private static final Logger logger = LogGen.getLoggerInstance(Commons.class);
+public class Shared implements Constants {
+    private static final Logger logger = LogGen.getLoggerInstance(Shared.class);
     public static List<List<String>> resultSet;
     public static int validate;
     public static String message;
@@ -82,7 +82,7 @@ public class Commons implements Constants {
         ifr.setValue(decHisFlagLocal,flag);
     }
     public static String getCpMarket(IFormReference ifr){return  getFieldValue(ifr,cpSelectMarketLocal);}
-    public static String getProcess(IFormReference ifr){
+    public static String getMoneyMarketProcess(IFormReference ifr){
         return getFieldValue(ifr,selectProcessLocal);
     }
     public String getCurrentDateTime (String format){
@@ -117,17 +117,17 @@ public class Commons implements Constants {
     public void selectProcessSheet(IFormReference ifr){
         hideShowBackToDashboard(ifr,True);
         hideShowDashBoardTab(ifr, False);
-        if(getProcess(ifr).equalsIgnoreCase(commercialProcess)) {
+        if(getMoneyMarketProcess(ifr).equalsIgnoreCase(commercialProcess)) {
             ifr.setTabStyle(processTabName, commercialTab, visible, True);
             ifr.setTabStyle(processTabName, treasuryTab, visible, False);
             ifr.setTabStyle(processTabName, omoTab, visible, False);
         }
-        else if (getProcess(ifr).equalsIgnoreCase(treasuryProcess)) {
+        else if (getMoneyMarketProcess(ifr).equalsIgnoreCase(treasuryProcess)) {
             ifr.setTabStyle(processTabName, treasuryTab, visible, True);
             ifr.setTabStyle(processTabName, commercialTab, visible, False);
             ifr.setTabStyle(processTabName, omoTab, visible, False);
         }
-        else if (getProcess(ifr).equalsIgnoreCase(omoProcess)){
+        else if (getMoneyMarketProcess(ifr).equalsIgnoreCase(omoProcess)){
             ifr.setTabStyle(processTabName,omoTab,visible,False);
             ifr.setTabStyle(processTabName,commercialTab,visible,False);
             ifr.setTabStyle(processTabName,treasuryTab,visible,False);
@@ -144,19 +144,19 @@ public class Commons implements Constants {
         hideShow(ifr,new String[]{goBackDashboardSection},state);
     }
     public void showSelectedProcessSheet(IFormReference ifr){
-        logger.info("showSelectedProcessMethod -- selected process -- "+getProcess(ifr));
+        logger.info("showSelectedProcessMethod -- selected process -- "+ getMoneyMarketProcess(ifr));
         hideShowDashBoardTab(ifr,False);
-        if(getProcess(ifr).equalsIgnoreCase(commercialProcess)) {
+        if(getMoneyMarketProcess(ifr).equalsIgnoreCase(commercialProcess)) {
             ifr.setTabStyle(processTabName, commercialTab, visible, True);
             ifr.setTabStyle(processTabName, treasuryTab, visible, False);
             ifr.setTabStyle(processTabName, omoTab, visible, False);
         }
-        else if (getProcess(ifr).equalsIgnoreCase(treasuryProcess)) {
+        else if (getMoneyMarketProcess(ifr).equalsIgnoreCase(treasuryProcess)) {
             ifr.setTabStyle(processTabName, treasuryTab, visible, True);
             ifr.setTabStyle(processTabName, commercialTab, visible, False);
             ifr.setTabStyle(processTabName, omoTab, visible, False);
         }
-        else if (getProcess(ifr).equalsIgnoreCase(omoProcess)){
+        else if (getMoneyMarketProcess(ifr).equalsIgnoreCase(omoProcess)){
             ifr.setTabStyle(processTabName,omoTab,visible,True);
             ifr.setTabStyle(processTabName,commercialTab,visible,False);
             ifr.setTabStyle(processTabName,treasuryTab,visible,False);
@@ -627,7 +627,7 @@ public class Commons implements Constants {
        return empty;
     }
     public static boolean isCpProcess(IFormReference ifr){
-        return getProcess(ifr).equalsIgnoreCase(commercialProcess);
+        return getMoneyMarketProcess(ifr).equalsIgnoreCase(commercialProcess);
     }
     public static String cpSmCheckPrincipal(IFormReference ifr){
         if (isAmountNotInThousands(getFormattedFloat(getCpSmPrincipalBr(ifr)))) {

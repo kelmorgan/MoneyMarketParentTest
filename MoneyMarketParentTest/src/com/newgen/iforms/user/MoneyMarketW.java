@@ -1,13 +1,14 @@
 package com.newgen.iforms.user;
 
 import com.cp.main.CommercialPaper;
+import com.kelmorgan.ibpsformapis.apis.FormApi;
+import com.newgen.dashboard.Dashboard;
 import com.newgen.iforms.custom.IFormListenerFactory;
 import com.newgen.iforms.custom.IFormReference;
 import com.newgen.iforms.custom.IFormServerEventHandler;
-import com.newgen.utils.Commons;
 import com.newgen.utils.Constants;
 import com.newgen.utils.LogGen;
-import com.initiator.worksteps.*;
+import com.newgen.utils.Shared;
 import org.apache.log4j.Logger;
 
 public class MoneyMarketW implements IFormListenerFactory, Constants {
@@ -16,26 +17,15 @@ private Logger logger = LogGen.getLoggerInstance(MoneyMarketW.class);
 	public IFormServerEventHandler getClassInstance(IFormReference ifr) {
 		// TODO Auto-generated method stub
 		IFormServerEventHandler objActivity  = null;
-		String processName = ifr.getProcessName();
+		String processName = FormApi.getProcessName(ifr);
 		logger.info("processName: "+processName);
-		String activityName =ifr.getActivityName();
-		logger.info("activityName: "+activityName);
-		String process = Commons.getProcess(ifr);
+		String process = Shared.getMoneyMarketProcess(ifr);
 		logger.info("process: "+process);
 
 		try {
 		if (processName.equalsIgnoreCase(ProcessName)){
-			if (Commons.isEmpty(process)){
-				switch (activityName){
-					case treasuryOfficerInitiator:{
-						objActivity = new TreasuryOfficerInitiator();
-						break;
-					}
-					case branchInitiator:{
-						objActivity = new BranchInitiator();
-						break;
-					}
-				}
+			if (Shared.isEmpty(process)){
+				objActivity = new Dashboard();
 			}
 			else {
 				switch (process){
