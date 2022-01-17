@@ -10,6 +10,7 @@ public interface Constants {
 	// Please input workSteps between comment bracket
 
 	//general process Ids
+	String dashBoardFlagLocal = "DASHBOARDFLAG";
 	String selectProcessLocal = "g_select_market";
 	String processTabName = "tab2";
 	String dashboardTab = "0";
