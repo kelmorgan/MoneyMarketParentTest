@@ -8,23 +8,22 @@ import com.newgen.iforms.custom.IFormReference;
 import com.newgen.iforms.custom.IFormServerEventHandler;
 import com.newgen.utils.Constants;
 import com.newgen.utils.LogGen;
-import com.newgen.utils.Shared;
 import org.apache.log4j.Logger;
 
 public class MoneyMarketW implements IFormListenerFactory, Constants {
-private Logger logger = LogGen.getLoggerInstance(MoneyMarketW.class);
+private final Logger logger = LogGen.getLoggerInstance(MoneyMarketW.class);
 	@Override
 	public IFormServerEventHandler getClassInstance(IFormReference ifr) {
 		// TODO Auto-generated method stub
 		IFormServerEventHandler objActivity  = null;
 		String processName = FormApi.getProcessName(ifr);
 		logger.info("processName: "+processName);
-		String process = Shared.getMoneyMarketProcess(ifr);
+		String process = FormApi.getFieldValue(ifr,selectProcessLocal);
 		logger.info("process: "+process);
 
 		try {
 		if (processName.equalsIgnoreCase(ProcessName)){
-			if (Shared.isEmpty(process)){
+			if (process.isEmpty()){
 				objActivity = new Dashboard();
 			}
 			else {

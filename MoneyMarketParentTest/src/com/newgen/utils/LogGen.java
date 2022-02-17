@@ -5,8 +5,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.RollingFileAppender;
 
-public class LogGen implements Constants{
-
+public class LogGen  {
     public static Logger getLoggerInstance(Class logClass){
         Logger logger = null;
         try {
@@ -14,7 +13,7 @@ public class LogGen implements Constants{
             logger = Logger.getLogger(logClass);
             PatternLayout layout = new PatternLayout();
             layout.setConversionPattern("[%d{dd MMM yyyy HH:mm:ss:SSS}] (%F:%L) - %m%n");
-            String logFile = logPath+ logClass.getSimpleName() + ".log";
+            String logFile = Constants.logPath+ logClass.getSimpleName() + ".log";
             RollingFileAppender appender = new RollingFileAppender(layout,logFile,true);
             appender.setMaxFileSize("1000KB");
             appender.setMaxBackupIndex(10);

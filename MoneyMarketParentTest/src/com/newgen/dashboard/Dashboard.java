@@ -59,7 +59,5 @@ public class Dashboard implements IFormServerEventHandler , Constants {
 
     private void formLoad(IFormReference ifr){
         FormApi.setFields(ifr,new String[]{prevWsLocal,currWsLocal,dashBoardFlagLocal},new String[]{na,dashBoardWs,flag});
-        FormApi.setMandatory(ifr,selectProcessLocal);
-        FormApi.enableFields(ifr,selectProcessLocal);
     }
 }
