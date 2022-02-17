@@ -3,7 +3,7 @@ package com.newgen.utils;
 public interface Constants {
 	String ProcessName = "MoneyMarketW";
 	//WorkSteps
-	String dashBoardWs = "Dashboard";
+	String dashBoardWs = "Initiator";
 
 	//general process Ids
 	String dashBoardFlagLocal = "DASHBOARDFLAG";
